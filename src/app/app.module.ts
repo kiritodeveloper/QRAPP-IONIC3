@@ -10,6 +10,10 @@ import { HomePage, TabsPage, GuardadosPage, MapaPage } from  '../pages/index.pag
 // plugin
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
+// Servicios
+
+import { HistorialProvider } from '../providers/historial/historial'
+
 @NgModule({
   declarations: [
     MyApp,
@@ -34,7 +38,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     StatusBar,
     SplashScreen,
     BarcodeScanner,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    HistorialProvider
   ]
 })
 export class AppModule {}
