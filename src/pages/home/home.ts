@@ -24,10 +24,13 @@ export class HomePage {
 
   scan(){
     console.log("realizando scan");
+
     if (!this.platform.is('cordova')){ // Si la plataforma no es cordova es decir no es un dispositivo movil
-      this._historialProvider.agregar_Historial("http://google.com"); // Mandamos en duro el texto al agregar historial que esta en els ervicio
+      // this._historialProvider.agregar_Historial("http://google.com"); // Mandamos en duro el texto al agregar historial que esta en els ervicio
+      this._historialProvider.agregar_Historial("geo:51.678418,7.809007");
       return;
     }
+
     this.barcodeScanner.scan().then(barcodeData => {
       // Si lo hace todo bien
       console.log('result', barcodeData.text);

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ScanData } from '../../models/scan-data.model';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { ModalController } from 'ionic-angular';
+import { MapaPage } from '../../pages/index.paginas'
 
 
 @Injectable()
@@ -8,7 +10,8 @@ export class HistorialProvider {
   //Definimos un arreglo vacio de variables de tipo ScanData
   private _historial:ScanData[] = [];
 
-  constructor(private iab: InAppBrowser) {
+  constructor(private iab: InAppBrowser,
+              private modalController: ModalController) {
 
   }
 
@@ -32,7 +35,9 @@ export class HistorialProvider {
       case 'http': //Si es una pagina HTTP
         this.iab.create(scanData.info, "_system"); //Mandamos la URL que la tenemos en el info de scanData
         break;
-      
+      case 'mapa': // 'mapa' esta definido en el scan-data.model.ts
+        this.modalController.create(MapaPage, {coords: scanData.info}).present(); //Abriremos un modal cuando sea un mapa, mandamos como parametros las coordenadas del mapa (coords)
+        break;
       default:
         console.log('tipo no soportado');
     }

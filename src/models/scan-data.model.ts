@@ -7,6 +7,8 @@ export class ScanData {
     this.info = texto;
     if (texto.startsWith('http')) { // Si lo estamos trabajando en el navegador web del computador.
       this.tipo = 'http';
+    }else if (texto.startsWith('geo')){ // Cuando el texto del SCAN es geo seteamos el tipo en mapa
+      this.tipo = 'mapa';
     }
   }
 }
