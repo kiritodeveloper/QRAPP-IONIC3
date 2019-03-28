@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ScanData } from '../../models/scan-data.model';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { ModalController } from 'ionic-angular';
-import { MapaPage } from '../../pages/index.paginas'
+import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
+import {ModalController, Platform, ToastController} from 'ionic-angular';
+import { MapaPage } from '../../pages/index.paginas';
 
 
 @Injectable()
@@ -11,7 +12,10 @@ export class HistorialProvider {
   private _historial:ScanData[] = [];
 
   constructor(private iab: InAppBrowser,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              private contacts: Contacts,
+              private platform: Platform,
+              private toastCtrl: ToastController) {
 
   }
 
@@ -49,6 +53,31 @@ export class HistorialProvider {
   private crear_Contacto(texto:string){
     let campos:any = this.parse_vcard(texto);
     console.log(campos);
+    //Aca una vez que leemos los datos del contactos pasamos a guardarlos en un nuevo contacto del dispositivo
+    let nombre = campos['fn'];
+    let tel = campos.tel[0].value[0];
+    
+    //Puede mandar error si estamos en la computadora prevenimos esto con el platform
+    if (!this.platform.is('cordova')){ // Sino existe el objeto cordova
+      console.warn("Estoy en la computadora no puedo crear contacto");
+      return;
+    }
+    // Si estamos en el dispositivo continuamos
+    let contact: Contact = this.contacts.create(); // Tenemos el contacto
+    contact.name = new ContactName(null, nombre); // Guardamos el nombre del contacto
+    contact.phoneNumbers = [new ContactField('mobile', tel)]; // Guardamos el numero de telefono
+    contact.save().then( // Guardamos el contacto y regresamos una promesa por si ocurre un error o si se hace correctamente
+      () => this.crear_Toast('contacto ' + nombre + 'creado!'), // Se realizo correctamente
+      (error) => this.crear_Toast('Error: '+ error) // Ocurrio un error
+    )
+  }
+
+  private crear_Toast(mensaje:string){
+    const toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: 2500
+    });
+    toast.present();
   }
 
   private parse_vcard( input:string ) {

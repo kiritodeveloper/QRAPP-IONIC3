@@ -13,6 +13,7 @@ import { AgmCoreModule } from '@agm/core';
 // plugin
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Contacts } from '@ionic-native/contacts';
 
 // Servicios
 import { HistorialProvider } from '../providers/historial/historial'
@@ -46,7 +47,8 @@ import { HistorialProvider } from '../providers/historial/historial'
     BarcodeScanner,
     InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HistorialProvider
+    HistorialProvider,
+    Contacts
   ]
 })
 export class AppModule {}
