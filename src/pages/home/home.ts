@@ -27,7 +27,17 @@ export class HomePage {
 
     if (!this.platform.is('cordova')){ // Si la plataforma no es cordova es decir no es un dispositivo movil
       // this._historialProvider.agregar_Historial("http://google.com"); // Mandamos en duro el texto al agregar historial que esta en els ervicio
-      this._historialProvider.agregar_Historial("geo:51.678418,7.809007");
+      // this._historialProvider.agregar_Historial("geo:51.678418,7.809007");
+      this._historialProvider.agregar_Historial( `BEGIN:VCARD
+VERSION:2.1
+N:Kent;Clark
+FN:Clark Kent
+ORG:
+TEL;HOME;VOICE:12345
+TEL;TYPE=cell:67890
+ADR;TYPE=work:;;;
+EMAIL:clark@superman.com
+END:VCARD` );
       return;
     }
 
