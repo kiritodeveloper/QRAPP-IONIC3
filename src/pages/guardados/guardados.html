@@ -4,6 +4,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <!--Barremos el arreglo que esta en el historial y obtenemos la posicion del arreglo, mandando la posicion en el abrir_Scan-->
+    <button *ngFor="let data of historial; let i = index" ion-item="" (click)="abrir_Scan(i)">
+      {{data.info}}
+      <p>{{data.tipo}}</p>
+    </button>
+  </ion-list>
 </ion-content>

@@ -24,8 +24,8 @@ export class HomePage {
 
   scan(){
     console.log("realizando scan");
-    if (!this.platform.is('cordova')){
-      this._historialProvider.agregar_Historial("http://google.com");
+    if (!this.platform.is('cordova')){ // Si la plataforma no es cordova es decir no es un dispositivo movil
+      this._historialProvider.agregar_Historial("http://google.com"); // Mandamos en duro el texto al agregar historial que esta en els ervicio
       return;
     }
     this.barcodeScanner.scan().then(barcodeData => {
@@ -35,8 +35,8 @@ export class HomePage {
       console.log('result', barcodeData.cancelled);
 
       // @ts-ignore
-      if (barcodeData.cancelled == 0 && barcodeData.text != null){
-        this._historialProvider.agregar_Historial(barcodeData.text);
+      if (barcodeData.cancelled == 0 && barcodeData.text != null){ //Si el barcode no es cancelado y el texto es diferente de nulo osea que hay 'value'
+        this._historialProvider.agregar_Historial(barcodeData.text); // Agregamos la informacion del barcodeData al agregarHistorial
       }
 
     }).catch(err => {

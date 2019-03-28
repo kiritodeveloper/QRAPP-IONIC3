@@ -9,6 +9,8 @@ import { HomePage, TabsPage, GuardadosPage, MapaPage } from  '../pages/index.pag
 
 // plugin
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 
 // Servicios
 
@@ -38,6 +40,7 @@ import { HistorialProvider } from '../providers/historial/historial'
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HistorialProvider
   ]
