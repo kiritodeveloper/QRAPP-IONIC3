@@ -9,8 +9,10 @@ export class ScanData {
       this.tipo = 'http';
     }else if (texto.startsWith('geo')){ // Cuando el texto del SCAN es geo seteamos el tipo en mapa
       this.tipo = 'mapa';
-    }else if (texto.startsWith("BEGIN:VCARD")){
-      this.tipo = 'contacto'
+    }else if (texto.startsWith("BEGIN:VCARD")){ // cuando el texto es un contacto
+      this.tipo = 'contacto';
+    }else if (texto.startsWith('MATMSG')){
+      this.tipo='email';
     }
   }
 }
